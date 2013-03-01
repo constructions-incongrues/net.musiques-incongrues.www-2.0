@@ -3,6 +3,9 @@
 /etc/*
 !/etc/common
 
+# abt-dist
+/src/forum/conf/database_connection.php
+
 # composer
 /vendor/*
 
