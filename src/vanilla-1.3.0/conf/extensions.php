@@ -6,4 +6,3 @@ include($Configuration['EXTENSIONS_PATH']."DiscussionPages/default.php");
 include($Configuration['EXTENSIONS_PATH']."NewApplicants/default.php");
 include($Configuration['EXTENSIONS_PATH']."PreviewPost/default.php");
 include($Configuration['EXTENSIONS_PATH']."Whisperfi/default.php");
-?>
