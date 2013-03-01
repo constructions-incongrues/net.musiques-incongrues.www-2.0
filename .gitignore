@@ -5,3 +5,8 @@
 
 # composer
 /vendor/*
+
+# backup files
+*.bak
+*~
+*.swp
