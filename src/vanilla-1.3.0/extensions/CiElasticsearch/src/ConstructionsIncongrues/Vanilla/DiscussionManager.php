@@ -48,6 +48,7 @@ class DiscussionManager extends \DiscussionManager
 		$this->CallDelegate('PreGetDiscussionList');
 
 		// Do not show hidden discussions to users who are not allowed to
+		// TODO : Does not work
 		$esFilterAnd = new BoolAnd();
 		if (!$this->Context->Session->User->Permission('PERMISSION_VIEW_HIDDEN_DISCUSSIONS')
 			|| !$this->Context->Session->User->Preference('ShowDeletedDiscussions')) {
@@ -63,10 +64,21 @@ class DiscussionManager extends \DiscussionManager
 		} elseif(count($CategoryID) > 1) {
 			// TODO : convert to ES syntax
 			// $s->AddWhere('t', 'CategoryID', '', '('. implode(',', $CategoryID) .')', 'IN');
+		} elseif ($this->Context->Session->UserID > 0) {
+			// TODO : convert to ES syntax
+			// $s->AddJoin('CategoryBlock', 'cb', 'CategoryID', 't', 'CategoryID', 'left join', ' and cb.'.$this->Context->DatabaseColumns['CategoryBlock']['UserID'].' = '.$this->Context->Session->UserID);
+			// // This coalesce seems to be slowing things down
+			// // $s->AddWhere('coalesce(cb.Blocked,0)', 1, '<>');
+			// $s->AddWhere('cb', 'Blocked', '', '0', '=', 'and', '', 1, 1);
+			// $s->AddWhere('cb', 'Blocked', '', '0', '=', 'or', '', 0, 0);
+			// $s->AddWhere('cb', 'Blocked', '', 'null', 'is', 'or', '', 0, 0);
+			// $s->EndWhereGroup();
 		}
 		if (isset($filterCategory)) {
 			$esFilterAnd->addFilter($filterCategory);
 		}
+
+		// TODO : GetDiscussionWhisperFilter
 
 		// TODO : reproduce initial logic
 		// TODO : then implement facets !
@@ -96,6 +108,14 @@ class DiscussionManager extends \DiscussionManager
 			// Convert dates to something Vanilla understands
 			$data['DateCreated'] = $this->fixDateTime($data['DateCreated']);
 			$data['DateLastActive'] = $this->fixDateTime($data['DateLastActive']);
+			if (isset($data['DateLastWhisper'])) {
+				$data['DateLastWhisper'] = $this->fixDateTime($data['DateLastWhisper']);
+			} else {
+				$data['DateLastWhisper'] = null;
+			}
+
+			// Fix session related data
+
 
 			// Fix encoding
 			$data['Name'] = utf8_decode($data['Name']);
@@ -114,9 +134,11 @@ class DiscussionManager extends \DiscussionManager
 	 * @return Datetime format : 2012-08-22 10:01:00
 	 */
 	private function fixDateTime($datetime)
-	{
-		$matches = array();
-		preg_match('/^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2}).+$/', $datetime, $matches);
-		return sprintf('%s %s', $matches[1], $matches[2]);
+	{	if ($datetime) {
+			$matches = array();
+			preg_match('/^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2}).+$/', $datetime, $matches);
+			$datetime = sprintf('%s %s', $matches[1], $matches[2]);
+		}
+		return $datetime;
 	}
 }
