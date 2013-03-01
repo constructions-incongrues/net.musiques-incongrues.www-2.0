@@ -1,0 +1,7 @@
+# abt
+*-dist
+/etc/*
+!/etc/common
+
+# composer
+/vendor/*
