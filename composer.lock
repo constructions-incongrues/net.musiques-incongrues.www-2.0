@@ -1,5 +1,5 @@
 {
-    "hash": "0ab1f7cddcf447e0e6477c47c0cce4a5",
+    "hash": "0975825ee52d7900a51ad2bed0c21da1",
     "packages": [
         {
             "name": "constructions-incongrues/ananas-build-toolkit",
@@ -23,6 +23,55 @@
                 "source": "https://github.com/constructions-incongrues/ananas-build-toolkit"
             },
             "time": "2013-01-25 15:41:12"
+        },
+        {
+            "name": "ruflin/Elastica",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ruflin/Elastica.git",
+                "reference": "e6167d772b96e178fac18402e65ee517e825ed39"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/e6167d772b96e178fac18402e65ee517e825ed39",
+                "reference": "e6167d772b96e178fac18402e65ee517e825ed39",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "munkie/elasticsearch-thrift-php": "1.4.*",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "suggest": {
+                "munkie/elasticsearch-thrift-php": "Allow using thrift transport"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Elastica": "lib/",
+                    "Elastica\\Test": "test/lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Ruflin",
+                    "homepage": "http://ruflin.com/"
+                }
+            ],
+            "description": "Elasticsearch Client",
+            "homepage": "http://ruflin.github.com/Elastica/",
+            "keywords": [
+                "client",
+                "search"
+            ],
+            "time": "2013-02-25 15:30:16"
         }
     ],
     "packages-dev": null,
@@ -31,6 +80,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "constructions-incongrues/ananas-build-toolkit": 20
+        "constructions-incongrues/ananas-build-toolkit": 20,
+        "ruflin/elastica": 20
     }
 }
