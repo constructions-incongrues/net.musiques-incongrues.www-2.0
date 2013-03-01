@@ -38,11 +38,11 @@ echo '<div id="AccountProfile">';
 		</li>
 		<li>
 			<h3>'.$this->Context->GetDefinition('AccountCreated').'</h3>
-			<p>'.TimeDiff($this->Context, $this->User->DateFirstVisit, mktime()).'</p>
+			<p>'.TimeDiff($this->Context, $this->User->DateFirstVisit, time()).'</p>
 		</li>
 		<li>
 			<h3>'.$this->Context->GetDefinition('LastActive').'</h3>
-			<p>'.TimeDiff($this->Context, $this->User->DateLastActive, mktime()).'</p>
+			<p>'.TimeDiff($this->Context, $this->User->DateLastActive, time()).'</p>
 		</li>
 		<li>
 			<h3>'.$this->Context->GetDefinition('VisitCount').'</h3>

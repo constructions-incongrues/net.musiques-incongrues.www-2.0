@@ -10,10 +10,10 @@ $UserList .= '<li class="UserAccount'.($Alternate ? ' Alternate' : '').($FirstRo
 			<span>'.$this->Context->GetDefinition('User').'</span> <a href="'.GetUrl($this->Context->Configuration, 'account.php', '', 'u', $u->UserID).'">'.$u->Name.'</a> ('.$u->Role.')
 		</li>
 		<li class="User AccountCreated">
-			<span>'.$this->Context->GetDefinition('AccountCreated').'</span> '.TimeDiff($this->Context, $u->DateFirstVisit,mktime()).'
+			<span>'.$this->Context->GetDefinition('AccountCreated').'</span> '.TimeDiff($this->Context, $u->DateFirstVisit,time()).'
 		</li>
 		<li class="User LastActive">
-			<span>'.$this->Context->GetDefinition('LastActive').'</span> '.TimeDiff($this->Context, $u->DateLastActive,mktime()).'
+			<span>'.$this->Context->GetDefinition('LastActive').'</span> '.TimeDiff($this->Context, $u->DateLastActive,time()).'
 		</li>
 		<li class="User VisitCount">
 			<span>'.$this->Context->GetDefinition('VisitCount').'</span> '.$u->CountVisit.'

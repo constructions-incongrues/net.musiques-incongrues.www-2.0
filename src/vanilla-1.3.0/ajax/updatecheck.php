@@ -29,7 +29,7 @@ if ($PostBackKey != '' && $PostBackKey != $Context->Session->GetCsrfValidationKe
 	// Also record that the check occurred
 	$SettingsFile = $Context->Configuration['APPLICATION_PATH'].'conf/settings.php';
 	$ConfigurationManager = $Context->ObjectFactory->NewContextObject($Context, "ConfigurationManager");
-	$ConfigurationManager->DefineSetting('LAST_UPDATE', mktime(), 1);
+	$ConfigurationManager->DefineSetting('LAST_UPDATE', time(), 1);
 	$ConfigurationManager->SaveSettingsToFile($SettingsFile);
 
 	// Spit out the core message

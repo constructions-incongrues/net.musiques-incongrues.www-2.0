@@ -701,7 +701,7 @@ function ThemeFilePath($Configuration, $FileName, $DefaultThemeDir=Null) {
 }
 
 function MysqlDateTime($Timestamp = '') {
-	if ($Timestamp == '') $Timestamp = mktime();
+	if ($Timestamp == '') $Timestamp = time();
 	return date('Y-m-d H:i:s', $Timestamp);
 }
 

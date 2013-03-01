@@ -93,7 +93,7 @@ class Uploader extends Delegation {
 					// Redefine new file to include proper file extension
 					$DestinationNameOnly = substr($DestinationName, 0, strpos($DestinationName, '.'.$FileExtension));
 					if ($TimeStampName) {
-						$DestinationNameOnly .= date('-Y-m-d', mktime());
+						$DestinationNameOnly .= date('-Y-m-d', time());
 						$DestinationName = $DestinationNameOnly.'.'.$FileExtension;
 					}
 					$Return = $DestinationName;

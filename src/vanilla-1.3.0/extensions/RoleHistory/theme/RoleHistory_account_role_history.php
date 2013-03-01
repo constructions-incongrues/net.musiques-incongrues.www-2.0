@@ -23,7 +23,7 @@ while ($Row = $this->Context->Database->GetRow($this->History)) {
 				'
 			. $UserHistory->Role
 			. ' <small>('
-			. TimeDiff($this->Context, $UserHistory->Date, mktime())
+			. TimeDiff($this->Context, $UserHistory->Date, time())
 			. ')</small></h3>
 				
 			<p class="Info">

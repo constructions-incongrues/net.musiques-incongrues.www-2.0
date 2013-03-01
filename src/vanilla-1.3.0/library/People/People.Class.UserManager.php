@@ -1094,7 +1094,7 @@ class UserManager extends Delegation {
 			$result = $this->Context->Database->Select($s, $this->Name, 'UpdateUserCommentCount', 'An error occurred while retrieving user activity data.');
 			while ($rows = $this->Context->Database->GetRow($result)) {
 				$LastCommentPost = UnixTimestamp($rows['LastCommentPost']);
-				$DateDiff = mktime() - $LastCommentPost;
+				$DateDiff = time() - $LastCommentPost;
 				$CommentSpamCheck = ForceInt($rows['CommentSpamCheck'], 0);
 			}
 
@@ -1158,7 +1158,7 @@ class UserManager extends Delegation {
 			$result = $this->Context->Database->Select($s, $this->Name, 'UpdateUserDiscussionCount', 'An error occurred while retrieving user activity data.');
 			while ($rows = $this->Context->Database->GetRow($result)) {
 				$LastDiscussionPost = UnixTimestamp($rows['LastDiscussionPost']);
-				$DateDiff = mktime() - $LastDiscussionPost;
+				$DateDiff = time() - $LastDiscussionPost;
 				$DiscussionSpamCheck = ForceInt($rows['DiscussionSpamCheck'], 0);
 			}
 			$SecondsSinceLastPost = ForceInt($DateDiff, 0);

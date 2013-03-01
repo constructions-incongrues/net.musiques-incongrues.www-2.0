@@ -21,7 +21,7 @@ $CommentList .= '<li class="SearchComment'.($Alternate ? ' Alternate' : '').'">
 		</li>
 		<li class="CommentAdded">
 			<span>'.$this->Context->GetDefinition('Added').'</span>
-			'.TimeDiff($this->Context, $Comment->DateCreated,mktime()).'
+			'.TimeDiff($this->Context, $Comment->DateCreated,time()).'
 		</li>';
 $this->DelegateParameters['Comment'] = &$Comment;
 $this->DelegateParameters['CommentList'] = &$CommentList;
