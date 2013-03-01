@@ -4,8 +4,8 @@
 !/etc/common
 
 # abt-dist
-/src/forum/conf/database_connection.php
-/src/forum/extensions/CiElasticsearch/bin/init-rivers
+/src/vanilla-1.3.0/conf/database_connection.php
+/src/vanilla-1.3.0/extensions/CiElasticsearch/bin/init-rivers
 
 # composer
 /vendor/*

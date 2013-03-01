@@ -51,7 +51,7 @@ class DiscussionManager extends \DiscussionManager
 		$esFilterAnd = new BoolAnd();
 		if (!$this->Context->Session->User->Permission('PERMISSION_VIEW_HIDDEN_DISCUSSIONS')
 			|| !$this->Context->Session->User->Preference('ShowDeletedDiscussions')) {
-			// $filterActive = new Term(array('Active' => 1));
+			$filterActive = new Term(array('Active' => 1));
 		}
 		if (isset($filterActive)) {
 			$esFilterAnd->addFilter($filterActive);
@@ -70,12 +70,12 @@ class DiscussionManager extends \DiscussionManager
 
 		// TODO : reproduce initial logic
 		// TODO : then implement facets !
-		$queryTerm = new \Elastica\Query\Term(array('name' => '*'));
+		$queryString = new \Elastica\Query\QueryString('*');
 
 		// Build final query object
 		// $query->setFilter($esFilterAnd);
-		$queryConstantScore = new \Elastica\Query\ConstantScore($filterCategory);
-		$query->setQuery($queryConstantScore);
+		$query->setFilter($esFilterAnd);
+		$query->setQuery($queryString);
 
 		// Sorting
 		$sort = array('DateLastActive' => array('order' => 'desc'));
@@ -84,8 +84,6 @@ class DiscussionManager extends \DiscussionManager
 		// Pagination
 		$query->setFrom(($CurrentPage - 1) * $RowsPerPage);
 		$query->setLimit($RowsPerPage);
-
-		print_r($query->toArray());
 
 		// Perform search
 		$results = $indexDiscussions->search($query);
