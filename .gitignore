@@ -5,6 +5,7 @@
 
 # abt-dist
 /src/forum/conf/database_connection.php
+/src/forum/extensions/CiElasticsearch/bin/init-rivers
 
 # composer
 /vendor/*
