@@ -120,39 +120,47 @@ class Discussion extends Delegation {
 
 	// Retrieve properties from current DataRowSet
 	function GetPropertiesFromDataSet($DataSet) {
-		$this->DiscussionID = @$DataSet['DiscussionID'];
-		$this->FirstCommentID = @$DataSet['FirstCommentID'];
-		$this->CategoryID = @$DataSet['CategoryID'];
-		$this->Category = @$DataSet['Category'];
-		$this->AuthUserID = @$DataSet['AuthUserID'];
-		$this->AuthUsername = @$DataSet['AuthUsername'];
-		$this->LastUserID = @$DataSet['LastUserID'];
-		$this->LastUsername = @$DataSet['LastUsername'];
-		$this->Active = @$DataSet['Active'];
-		$this->Closed = @$DataSet['Closed'];
-		$this->Sticky = @$DataSet['Sticky'];
-		$this->Bookmarked = @$DataSet['Bookmarked'];
-		$this->Sink = @$DataSet['Sink'];
-		$this->Name = @$DataSet['Name'];
-		$this->DateCreated = UnixTimestamp(@$DataSet['DateCreated']);
-		$this->DateLastActive = UnixTimestamp(@$DataSet['DateLastActive']);
-		$this->CountComments = @$DataSet['CountComments'];
+		$this->DiscussionID = $DataSet['DiscussionID'];
+		$this->FirstCommentID = $DataSet['FirstCommentID'];
+		$this->CategoryID = $DataSet['CategoryID'];
+		$this->Category = $DataSet['Category'];
+		$this->AuthUserID = $DataSet['AuthUserID'];
+		$this->AuthUsername = $DataSet['AuthUsername'];
+		$this->LastUserID = $DataSet['LastUserID'];
+		$this->LastUsername = $DataSet['LastUsername'];
+		$this->Active = $DataSet['Active'];
+		$this->Closed = $DataSet['Closed'];
+		$this->Sticky = $DataSet['Sticky'];
+		$this->Bookmarked = $DataSet['Bookmarked'];
+		$this->Sink = $DataSet['Sink'];
+		$this->Name = $DataSet['Name'];
+		$this->DateCreated = UnixTimestamp($DataSet['DateCreated']);
+		$this->DateLastActive = UnixTimestamp($DataSet['DateLastActive']);
+		$this->CountComments = $DataSet['CountComments'];
 		
 		if ($this->Context->Configuration['ENABLE_WHISPERS']) {
-			$this->WhisperUserID = @$DataSet['WhisperUserID'];
-			$this->WhisperUsername = @$DataSet['WhisperUsername'];
+			$this->WhisperUserID = $DataSet['WhisperUserID'];
+			$this->WhisperUsername = $DataSet['WhisperUsername'];
 
-			$WhisperFromDateLastActive = UnixTimestamp(@$DataSet['WhisperFromDateLastActive']);
-			$WhisperFromLastUserID = @$DataSet['WhisperFromLastUserID'];
-			$WhisperFromLastFullName = @$DataSet['WhisperFromLastFullName'];
-			$WhisperFromLastUsername = @$DataSet['WhisperFromLastUsername'];
-			$this->CountWhispersFrom = @$DataSet['CountWhispersFrom'];
+			$WhisperFromDateLastActive = UnixTimestamp($DataSet['WhisperFromDateLastActive']);
+			$WhisperFromLastUserID = $DataSet['WhisperFromLastUserID'];
+			if (isset($DataSet['WhisperFromLastFullName'])) {
+				$WhisperFromLastFullName = $DataSet['WhisperFromLastFullName'];
+			} else {
+				$DataSet['WhisperFromLastFullName'] = null;
+			}
+			$WhisperFromLastUsername = $DataSet['WhisperFromLastUsername'];
+			$this->CountWhispersFrom = $DataSet['CountWhispersFrom'];
 
-			$WhisperToDateLastActive = UnixTimestamp(@$DataSet['WhisperToDateLastActive']);
-			$WhisperToLastUserID = @$DataSet['WhisperToLastUserID'];
-			$WhisperToLastFullName = @$DataSet['WhisperToLastFullName'];
-			$WhisperToLastUsername = @$DataSet['WhisperToLastUsername'];
-			$this->CountWhispersTo = @$DataSet['CountWhispersTo'];
+			$WhisperToDateLastActive = UnixTimestamp($DataSet['WhisperToDateLastActive']);
+			$WhisperToLastUserID = $DataSet['WhisperToLastUserID'];
+			if (isset($DataSet['WhisperToLastFullName'])) {
+				$WhisperToLastFullName = $DataSet['WhisperToLastFullName'];
+			} else {
+				$DataSet['WhisperToLastFullName'] = null;
+			}
+			$WhisperToLastUsername = $DataSet['WhisperToLastUsername'];
+			$this->CountWhispersTo = $DataSet['CountWhispersTo'];
 
 			$this->CountComments += $this->CountWhispersFrom;
 			$this->CountComments += $this->CountWhispersTo;
@@ -179,8 +187,8 @@ class Discussion extends Delegation {
 
 		$this->CountReplies = $this->CountComments - 1;
 		if ($this->CountReplies < 0) $this->CountReplies = 0;
-		$this->LastViewed = UnixTimestamp(@$DataSet['LastViewed']);
-		$this->LastViewCountComments = @$DataSet['LastViewCountComments'];
+		$this->LastViewed = UnixTimestamp($DataSet['LastViewed']);
+		$this->LastViewCountComments = $DataSet['LastViewCountComments'];
 		if ($this->LastViewed != '') {
 			$this->NewComments = $this->CountComments - $this->LastViewCountComments;
 			if ($this->NewComments < 0) $this->NewComments = 0;
