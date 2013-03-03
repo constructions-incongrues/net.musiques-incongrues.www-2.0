@@ -511,6 +511,7 @@ class DiscussionManager extends Delegation {
 					if ($this->Context->WarningCollector->Count() == 0) {
 
 						$this->DelegateParameters['SqlBuilder'] = &$s;
+						$this->DelegateParameters['Discussion'] = &$Discussion;
 						$this->CallDelegate( 'PreSaveDiscussion' );
 
 						$s->SetMainTable('Discussion', 'd');
@@ -545,6 +546,9 @@ class DiscussionManager extends Delegation {
 							$s->AddWhere('d', 'DiscussionID', '', $Discussion->Comment->DiscussionID, '=');
 							$this->Context->Database->Update($s, $this->Name, 'NewDiscussion', 'An error occurred while updating discussion properties.');
 						}
+						// Call post save delegate
+						$this->DelegateParameters['Discussion'] = $this->GetDiscussionById($Discussion->DiscussionID);
+						$this->CallDelegate( 'PostSaveDiscussion' );
 					}
 				}
 			}
