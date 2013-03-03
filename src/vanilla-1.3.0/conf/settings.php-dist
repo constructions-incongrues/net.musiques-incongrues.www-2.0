@@ -1,0 +1,25 @@
+<?php
+// Application Settings
+$Configuration['SETUP_TEST'] = '1';
+$Configuration['APPLICATION_PATH'] = '@vanilla.path.root@/';
+$Configuration['DATABASE_PATH'] = '@vanilla.path.root@/conf/database.php';
+$Configuration['LIBRARY_PATH'] = '@vanilla.path.root@/library/';
+$Configuration['EXTENSIONS_PATH'] = '@vanilla.path.root@/extensions/';
+$Configuration['LANGUAGES_PATH'] = '@vanilla.path.root@/languages/';
+$Configuration['THEME_PATH'] = $Configuration['EXTENSIONS_PATH'].'/CiElasticsearch/themes/vanilla/';
+$Configuration['DEFAULT_STYLE'] = '@vanilla.uri.root@/themes/vanilla/styles/default/';
+$Configuration['WEB_ROOT'] = '@vanilla.uri.root@/';
+$Configuration['BASE_URL'] = '@vanilla.url.root@/';
+$Configuration['FORWARD_VALIDATED_USER_URL'] = '@vanilla.url.root@/';
+$Configuration['SUPPORT_EMAIL'] = 'contact@musiques-incongrues.net';
+$Configuration['SUPPORT_NAME'] = 'Musiques Incongrues';
+$Configuration['APPLICATION_TITLE'] = 'Musiques Incongrues';
+$Configuration['COOKIE_DOMAIN'] = '@vanilla.domain@';
+$Configuration['COOKIE_PATH'] = '@vanilla.uri.root@/';
+$Configuration['BANNER_TITLE'] = 'Musiques Incongrues';
+$Configuration['SETUP_COMPLETE'] = '1';
+$Configuration['DATABASE_VERSION'] = '2';
+$Configuration['WHISPERFI_AUTO_ALL'] = '0';
+$Configuration['WHISPERFI_INSTALL_COMPLETE'] = '1';
+$Configuration['ADDON_NOTICE'] = '0';
+$Configuration['LAST_UPDATE'] = '1362140855';

@@ -1,11 +1,11 @@
 # abt
-*-dist
 /etc/*
 !/etc/common
 
 # abt-dist
 /src/vanilla-1.3.0/conf/database_connection.php
 /src/vanilla-1.3.0/extensions/CiElasticsearch/bin/init-rivers
+/src/vanilla-1.3.0/conf/settings.php
 
 # composer
 /vendor/*

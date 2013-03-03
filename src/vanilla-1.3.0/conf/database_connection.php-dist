@@ -1,0 +1,5 @@
+// Database Configuration Settings
+$Configuration['DATABASE_HOST'] = '@db.vanilla.host@';
+$Configuration['DATABASE_NAME'] = '@db.vanilla.name@';
+$Configuration['DATABASE_USER'] = '@db.vanilla.username@';
+$Configuration['DATABASE_PASSWORD'] = '@db.vanilla.password@';
