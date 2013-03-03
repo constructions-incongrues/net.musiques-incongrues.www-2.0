@@ -105,40 +105,11 @@ class DiscussionManager extends \DiscussionManager
 		foreach ($results as $result) {
 			$data = $result->getData();
 
-			// Convert dates to something Vanilla understands
-			$data['DateCreated'] = $this->fixDateTime($data['DateCreated']);
-			$data['DateLastActive'] = $this->fixDateTime($data['DateLastActive']);
-			if (isset($data['DateLastWhisper'])) {
-				$data['DateLastWhisper'] = $this->fixDateTime($data['DateLastWhisper']);
-			} else {
-				$data['DateLastWhisper'] = null;
-			}
-
-			// Fix session related data
-
-
-			// Fix encoding
-			$data['Name'] = utf8_decode($data['Name']);
-
-			$discussions[] = $data;
+			// Fetch discussion from database, in order to fix session related data
+			$discussion = parent::GetDiscussionById($data['DiscussionID']);
+			$discussions[] = $discussion;
 		}
 
 		return $discussions;
-	}
-
-	/**
-	 * Convert date to make it compatible with Vanilla.
-	 *
-	 * @param $datetime format : 2012-08-22T10:01:00.000Z
-	 *
-	 * @return Datetime format : 2012-08-22 10:01:00
-	 */
-	private function fixDateTime($datetime)
-	{	if ($datetime) {
-			$matches = array();
-			preg_match('/^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2}).+$/', $datetime, $matches);
-			$datetime = sprintf('%s %s', $matches[1], $matches[2]);
-		}
-		return $datetime;
 	}
 }

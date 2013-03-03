@@ -21,11 +21,9 @@ $DiscussionList = '';
 </div>
 <div id="ContentBody">
 	<ol id="Discussions">
-<?php foreach ($this->DiscussionData as $discussionData): ?>
+<?php foreach ($this->DiscussionData as $Discussion): ?>
 	<?php 
 		$RowNumber++;
-		$Discussion->Clear();
-		$Discussion->GetPropertiesFromDataSet($discussionData);
 		$Discussion->FormatPropertiesForDisplay();
 		$this->DelegateParameters['RowNumber'] = &$RowNumber; 
 		if ($Discussion->WhisperUserID > 0) {
@@ -33,7 +31,7 @@ $DiscussionList = '';
 		}
 		$this->DelegateParameters['Discussion'] = &$Discussion;
 		$this->CallDelegate( 'PreSingleDiscussionRender' );
-
+		
 		// Discussion search results are identical to regular discussion listings, so include the discussion search results template here.
 		include($ThemeFilePath);
 
