@@ -5,6 +5,7 @@ if (!defined('IN_VANILLA')) exit();
 
 // Constructions Incongrues custom extensions
 include($Configuration['EXTENSIONS_PATH']."CiElasticsearch/default.php");
+include($Configuration['EXTENSIONS_PATH']."CiTwig/default.php");
 
 // Base distribution
 include($Configuration['EXTENSIONS_PATH']."DiscussionPages/default.php");
