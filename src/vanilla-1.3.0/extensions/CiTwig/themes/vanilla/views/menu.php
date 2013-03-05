@@ -5,12 +5,14 @@
 {# User is authenticated #}
 {% if self.Context.Session.UserID > 0 %}
 		{{ self.Context.GetDefinition('SignedInAsX')|replace({ '//1': self.Context.Session.User.Name }) }}
-		(<a href="{{ self.Context.Configuration.SIGNOUT_URL }}">{{ self.Context.GetDefinition('SignOut') }}</a>)
+		(<a href="{{ AppendUrlParameters(self.Context.Configuration.SIGNOUT_URL, 'FormPostBackKey=' ~ self.Context.Session.GetCsrfValidationKey()) }}">
+			{{ self.Context.GetDefinition('SignOut') }}
+		</a>)
 {# User is not authenticated #}
 {% else %}
 		{{ self.Context.GetDefinition('NotSignedIn') }}
-		(<a href="{{ self.Context.Configuration.SIGNIN_URL }}">{{ self.Context.GetDefinition('SignIn') }}</a>)
-		or <a href="{{ self.Context.Configuration.REGISTRATION_URL }}">{{ self.Context.GetDefinition('Register') }}</a>
+		(<a href="{{ AppendUrlParameters(self.Context.Configuration.SIGNIN_URL, 'ReturnUrl=' ~ GetRequestUri(0)|url_encode) }}">{{ self.Context.GetDefinition('SignIn') }}</a>)
+		or <a href="{{ AppendUrlParameters(self.Context.Configuration.REGISTRATION_URL, 'ReturnUrl=' ~ GetRequestUri(0)|url_encode) }}">{{ self.Context.GetDefinition('Register') }}</a>
 {% endif %}
 	</div><!-- #Session -->
 
