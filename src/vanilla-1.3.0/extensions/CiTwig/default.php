@@ -2,6 +2,10 @@
 // Composer autoload
 require($Context->Configuration['APPLICATION_PATH'].'/../../vendor/autoload.php');
 
+// TODO : PSR-0
+require($Context->Configuration['LIBRARY_PATH'].'Vanilla/Vanilla.Class.CategoryManager.php');
+require(__DIR__.'/src/ConstructionsIncongrues/Vanilla/CategoryManager.php');
+
 /**
  * Helper function to be used in templates.
  * eg. in menu.php : CiTwigRender(__FILE__, $this);
@@ -22,7 +26,8 @@ $twig = new \Twig_Environment(new \Twig_Loader_Filesystem(__DIR__.'/themes/vanil
 // TODO : make list configurable
 // TODO : alpha sort
 $twigImportFunctions = array(
-	'AppendUrlParameters', 
+	'AppendUrlParameters',
+	'FlipBool',
 	'ForceBool',
 	'ForceIncomingBool',
 	'ForceIncomingString', 
@@ -42,3 +47,20 @@ foreach ($twigImportFunctions as $functionName) {
 
 // Add Twig instance to context object
 $Context->Twig = $twig;
+
+// Delegate functions
+
+/**
+ * Injects custom CategoryManager.
+ */
+function CiTwig_CategoryList_PreDataLoad(\CategoryList $categoryList)
+{
+	// Inject our own CategoryManager
+	$categoryList->DelegateParameters['CategoryManager'] = $categoryList->Context->ObjectFactory->NewContextObject(
+		$categoryList->Context, 
+		"\ConstructionsIncongrues\Vanilla\CategoryManager"
+	);
+}
+
+// Register delegates
+$Context->AddToDelegate('CategoryList', 'PreDataLoad', 'CiTwig_CategoryList_PreDataLoad');
