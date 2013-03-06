@@ -32,6 +32,7 @@ $twigImportFunctions = array(
 	'ForceIncomingBool',
 	'ForceIncomingString', 
 	'FormatHyperlink',
+	'GetPostFormatting',
 	'GetDynamicCheckBox',
 	'GetEmail',
 	'GetRequestUri', 
