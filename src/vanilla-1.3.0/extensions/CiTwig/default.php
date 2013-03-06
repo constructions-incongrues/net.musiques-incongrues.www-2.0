@@ -21,7 +21,19 @@ $twig = new \Twig_Environment(new \Twig_Loader_Filesystem(__DIR__.'/themes/vanil
 // Add functions
 // TODO : make list configurable
 // TODO : alpha sort
-$twigImportFunctions = array('AppendUrlParameters', 'GetRequestUri', 'GetDynamicCheckBox','ForceIncomingString', 'GetUrl', 'ForceBool');
+$twigImportFunctions = array(
+	'AppendUrlParameters', 
+	'ForceBool',
+	'ForceIncomingBool',
+	'ForceIncomingString', 
+	'FormatHyperlink',
+	'GetDynamicCheckBox',
+	'GetEmail',
+	'GetRequestUri', 
+	'GetUrl', 
+	'ReturnNonEmpty', 
+	'TimeDiff', 
+);
 foreach ($twigImportFunctions as $functionName) {
 	$twig->addFunction(new Twig_SimpleFunction($functionName, function () use ($functionName) {
 		return call_user_func_array($functionName, func_get_args());
