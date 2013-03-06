@@ -227,7 +227,24 @@ class DiscussionManager extends Delegation {
 	}
 
 	function GetDiscussionList($RowsPerPage, $CurrentPage, $CategoryID) {
-
+		// validate CategoryID, should be an int or an array of int superior to 0
+		$tmp = $CategoryID;
+		$CategoryID = array();
+		if (is_array($tmp)) {
+			foreach ($tmp as $Id) {
+				$Id = ForceInt($Id, 0);
+				if ($Id > 0) {
+					$CategoryID[] = $Id;
+				}
+			}
+		} else {
+			$tmp = ForceInt($tmp, 0);
+			if ($tmp > 0) {
+				$CategoryID[] = $tmp;
+			}
+		}
+		unset($tmp);
+		
 		if ($RowsPerPage > 0) {
 			$CurrentPage = ForceInt($CurrentPage, 1);
 			if ($CurrentPage < 1) $CurrentPage = 1;
