@@ -28,6 +28,11 @@ class CategoryList extends Control {
 		$this->Name = 'CategoryList';
 		$this->Control($Context);
 		$CategoryManager = $this->Context->ObjectFactory->NewContextObject($this->Context, 'CategoryManager');
+
+		// Call delegates
+		$this->DelegateParameters['CategoryManager'] = &$CategoryManager;
+		$this->CallDelegate('PreDataLoad');
+		
 		$this->Data = $CategoryManager->GetCategories(1);
 		$this->CallDelegate('Constructor');
 	}
