@@ -5,6 +5,8 @@ require($Context->Configuration['APPLICATION_PATH'].'/../../vendor/autoload.php'
 // TODO : PSR-0
 require($Context->Configuration['LIBRARY_PATH'].'Vanilla/Vanilla.Class.CategoryManager.php');
 require(__DIR__.'/src/ConstructionsIncongrues/Vanilla/CategoryManager.php');
+require($Context->Configuration['LIBRARY_PATH'].'Vanilla/Vanilla.Class.CommentManager.php');
+require(__DIR__.'/src/ConstructionsIncongrues/Vanilla/CommentManager.php');
 
 /**
  * Helper function to be used in templates.
@@ -27,6 +29,7 @@ $twig = new \Twig_Environment(new \Twig_Loader_Filesystem(__DIR__.'/themes/vanil
 // TODO : alpha sort
 $twigImportFunctions = array(
 	'AppendUrlParameters',
+	'DiscussionPrefix',
 	'FlipBool',
 	'ForceBool',
 	'ForceIncomingBool',
@@ -50,6 +53,7 @@ foreach ($twigImportFunctions as $functionName) {
 $Context->Twig = $twig;
 
 // Delegate functions
+// TODO : move those to dedicated file
 
 /**
  * Injects custom CategoryManager.
@@ -63,5 +67,18 @@ function CiTwig_CategoryList_PreDataLoad(\CategoryList $categoryList)
 	);
 }
 
+/**
+ * Injects custom CommentManager.
+ */
+function CiTwig_CommentGrid_PreDataLoad(\CommentGrid $commentGrid)
+{
+	// Inject our own CommentManager
+	$commentGrid->DelegateParameters['CommentManager'] = $commentGrid->Context->ObjectFactory->NewContextObject(
+		$commentGrid->Context, 
+		"\ConstructionsIncongrues\Vanilla\CommentManager"
+	);
+}
+
 // Register delegates
 $Context->AddToDelegate('CategoryList', 'PreDataLoad', 'CiTwig_CategoryList_PreDataLoad');
+$Context->AddToDelegate('CommentGrid', 'PreDataLoad', 'CiTwig_CommentGrid_PreDataLoad');
