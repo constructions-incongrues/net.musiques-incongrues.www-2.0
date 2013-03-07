@@ -29,8 +29,7 @@
 
 			<li>
 				<label for="CommentBox">
-					<a href="./" id="CommentBoxController" onclick="'
-					ToggleCommentBox('{{ self.Context.Configuration.WEB_ROOT }}ajax/switch.php', '{{ self.Context.GetDefinition('SmallInput') }}', '{{ self.Context.GetDefinition('BigInput') }}', '{{ self.Context.Session.GetCsrfValidationKey() }}'); return false;">{{ self.Context.GetDefinition(self.Context.Session.User.Preference('ShowLargeCommentBox') ? 'SmallInput' : 'BigInput') }}</a>
+					<a href="./" id="CommentBoxController" onclick="ToggleCommentBox('{{ self.Context.Configuration.WEB_ROOT }}ajax/switch.php', '{{ self.Context.GetDefinition('SmallInput') }}', '{{ self.Context.GetDefinition('BigInput') }}', '{{ self.Context.Session.GetCsrfValidationKey() }}'); return false;">{{ self.Context.GetDefinition(self.Context.Session.User.Preference('ShowLargeCommentBox') ? 'SmallInput' : 'BigInput') }}</a>
 
 					{{ self.CallDelegate('CommentForm_PostCommentToggle') }}
 
