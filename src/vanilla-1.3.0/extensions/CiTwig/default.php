@@ -29,14 +29,17 @@ $twig = new \Twig_Environment(new \Twig_Loader_Filesystem(__DIR__.'/themes/vanil
 // TODO : alpha sort
 $twigImportFunctions = array(
 	'AppendUrlParameters',
+	'CleanupString',
 	'DiscussionPrefix',
 	'FlipBool',
 	'ForceBool',
 	'ForceIncomingBool',
 	'ForceIncomingString', 
 	'FormatHyperlink',
-	'GetPostFormatting',
 	'GetDynamicCheckBox',
+	'GetLastCommentQuerystring',
+	'GetPostFormatting',
+	'GetUnreadQuerystring',
 	'GetEmail',
 	'GetRequestUri', 
 	'GetUrl', 
