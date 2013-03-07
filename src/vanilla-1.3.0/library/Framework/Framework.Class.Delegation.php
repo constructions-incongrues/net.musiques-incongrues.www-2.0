@@ -70,5 +70,10 @@ class Delegation {
 		}
 	}
 
+	public function SetDelegateParameter($name, $value)
+	{
+		$this->DelegateParameters[$name] = $value;
+	}
+
 }
 ?>
