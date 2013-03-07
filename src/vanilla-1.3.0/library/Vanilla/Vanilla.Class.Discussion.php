@@ -148,6 +148,7 @@ class Discussion extends Delegation {
 				$WhisperFromLastFullName = $DataSet['WhisperFromLastFullName'];
 			} else {
 				$DataSet['WhisperFromLastFullName'] = null;
+				$WhisperFromLastFullName = null;
 			}
 			$WhisperFromLastUsername = $DataSet['WhisperFromLastUsername'];
 			$this->CountWhispersFrom = $DataSet['CountWhispersFrom'];
