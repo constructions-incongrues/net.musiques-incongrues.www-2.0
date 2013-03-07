@@ -12,9 +12,9 @@ require(__DIR__.'/src/ConstructionsIncongrues/Vanilla/CommentManager.php');
  * Helper function to be used in templates.
  * eg. in menu.php : CiTwigRender(__FILE__, $this);
  */
-function CiTwigRender($path, $control)
+function CiTwigRender($path, $control, $additionalContext = array())
 {
-	echo $control->Context->Twig->render(basename($path), array('self' => $control)); 
+	echo $control->Context->Twig->render(basename($path), array_merge(array('self' => $control), $additionalContext)); 
 }
 
 // Instanciate and configure Twig loader
@@ -36,6 +36,7 @@ $twigImportFunctions = array(
 	'ForceIncomingBool',
 	'ForceIncomingString', 
 	'FormatHyperlink',
+	'FormatStringForDisplay',
 	'GetDynamicCheckBox',
 	'GetLastCommentQuerystring',
 	'GetPostFormatting',
