@@ -52,6 +52,11 @@ class CommentGrid extends Control {
 			} else {
 				// Load the data
 				$CommentManager = $Context->ObjectFactory->NewContextObject($Context, 'CommentManager');
+
+				// Call delegate
+				$this->DelegateParameters['CommentManager'] = &$CommentManager;
+				$this->CallDelegate('PreDataLoad');
+
 				$this->CommentDataCount = $CommentManager->GetCommentCount($DiscussionID);
 
 				// If trying to focus on a particular comment, make sure to look at the correct page
@@ -61,12 +66,23 @@ class CommentGrid extends Control {
 					$this->CurrentPage = 0;
 					$FoundComment = 0;
 					while ($this->CurrentPage <= $PageCount && !$FoundComment) {
-                  $this->CurrentPage++;
+                  		$this->CurrentPage++;
 						$this->CommentData = $CommentManager->GetCommentList($this->Context->Configuration['COMMENTS_PER_PAGE'], $this->CurrentPage, $DiscussionID);
-						while ($Row = $this->Context->Database->GetRow($this->CommentData)) {
-							if (ForceInt($Row['CommentID'], 0) == $Focus) {
-								$FoundComment = 1;
-								break;
+
+						// For non database related comments managers
+						if (is_array($this->CommentData)) {
+							foreach ($this->CommentData as $Row) {
+								if (ForceInt($Row['CommentID'], 0) == $Focus) {
+									$FoundComment = 1;
+									break;
+								}
+							}
+						} else {
+							while ($Row = $this->Context->Database->GetRow($this->CommentData)) {
+								if (ForceInt($Row['CommentID'], 0) == $Focus) {
+									$FoundComment = 1;
+									break;
+								}
 							}
 						}
 					}
