@@ -37,6 +37,7 @@ $twigImportFunctions = array(
 	'FlipBool',
 	'ForceBool',
 	'ForceIncomingBool',
+	'ForceIncomingInt',
 	'ForceIncomingString', 
 	'FormatHyperlink',
 	'FormatStringForDisplay',
