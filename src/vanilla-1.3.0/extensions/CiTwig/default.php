@@ -41,6 +41,7 @@ $twigImportFunctions = array(
 	'ForceIncomingString', 
 	'FormatHyperlink',
 	'FormatStringForDisplay',
+	'GetBasicCheckBox',
 	'GetDynamicCheckBox',
 	'GetLastCommentQuerystring',
 	'GetPostFormatting',
