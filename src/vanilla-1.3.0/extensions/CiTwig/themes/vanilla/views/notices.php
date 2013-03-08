@@ -2,7 +2,7 @@
 <div id="NoticeCollector" class="{{ self.CssClass }}">
 	{% for notice in self.Notices %}
 	<div class="Notice">
-		{{ notice }}
+		{{ notice|raw }}
 	</div>
 	{% endfor %}
 </div>
