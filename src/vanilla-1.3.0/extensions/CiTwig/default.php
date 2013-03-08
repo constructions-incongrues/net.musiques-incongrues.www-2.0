@@ -7,6 +7,8 @@ require($Context->Configuration['LIBRARY_PATH'].'Vanilla/Vanilla.Class.CategoryM
 require(__DIR__.'/src/ConstructionsIncongrues/Vanilla/CategoryManager.php');
 require($Context->Configuration['LIBRARY_PATH'].'Vanilla/Vanilla.Class.CommentManager.php');
 require(__DIR__.'/src/ConstructionsIncongrues/Vanilla/CommentManager.php');
+require($Context->Configuration['LIBRARY_PATH'].'Vanilla/Vanilla.Class.DiscussionManager.php');
+require(__DIR__.'/src/ConstructionsIncongrues/Vanilla/DiscussionManager/ArrayDiscussionManager.php');
 
 /**
  * Helper function to be used in templates.
@@ -29,6 +31,7 @@ $twig = new \Twig_Environment(new \Twig_Loader_Filesystem(__DIR__.'/themes/vanil
 // TODO : alpha sort
 $twigImportFunctions = array(
 	'AppendUrlParameters',
+	'CiTwigRender',
 	'CleanupString',
 	'DiscussionPrefix',
 	'FlipBool',
@@ -45,7 +48,8 @@ $twigImportFunctions = array(
 	'GetRequestUri', 
 	'GetUrl', 
 	'ReturnNonEmpty', 
-	'TimeDiff', 
+	'ThemeFilePath',
+	'TimeDiff',
 );
 foreach ($twigImportFunctions as $functionName) {
 	$twig->addFunction(new Twig_SimpleFunction($functionName, function () use ($functionName) {
@@ -83,6 +87,19 @@ function CiTwig_CommentGrid_PreDataLoad(\CommentGrid $commentGrid)
 	);
 }
 
+/**
+ * Injects custom DiscussionManager.
+ */
+function CiTwig_DiscussionGrid_PreDataLoad(\DiscussionGrid $discussionGrid)
+{
+	// Inject our own DiscussionManager
+	$discussionGrid->DelegateParameters['DiscussionManager'] = $discussionGrid->Context->ObjectFactory->NewContextObject(
+		$discussionGrid->Context, 
+		"\ConstructionsIncongrues\Vanilla\DiscussionManager\ArrayDiscussionManager"
+	);
+}
+
 // Register delegates
 $Context->AddToDelegate('CategoryList', 'PreDataLoad', 'CiTwig_CategoryList_PreDataLoad');
 $Context->AddToDelegate('CommentGrid', 'PreDataLoad', 'CiTwig_CommentGrid_PreDataLoad');
+$Context->AddToDelegate('DiscussionGrid', 'PreDataLoad', 'CiTwig_DiscussionGrid_PreDataLoad');

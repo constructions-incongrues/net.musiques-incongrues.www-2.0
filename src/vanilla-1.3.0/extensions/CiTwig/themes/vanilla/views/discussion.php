@@ -4,14 +4,14 @@
 {% set NewUrl = GetUnreadQuerystring(discussion, self.Context.Configuration, 1) %}
 {% set LastUrl = GetLastCommentQuerystring(discussion, self.Context.Configuration, CurrentUserJumpToLastCommentPref) %}
 
-{{ self.SetDelegateParameters('Discussion', discussion) }}
-{{ self.SetDelegateParameters('DiscussionList', discussionList) }}
+{{ self.SetDelegateParameter('Discussion', discussion) }}
+{{ self.SetDelegateParameter('DiscussionList', discussionList) }}
 
 <li id="Discussion_{{ discussion.DiscussionID }}" class="Discussion{{ discussion.Status}} {{ discussion.CountComments ? 'NoReplies' }} {{ self.Context.Configuration.USE_CATEGORIES ? ' Category_' ~ discussion.CategoryID }} {{ Alternate ? ' Alternate' }}">
 	{{ self.CallDelegate('PreDiscussionOptionsRender') }}
 	<ul>
 		<li class="DiscussionType">
-			<span>{{ self.Context.GetDefinition('DiscussionType') }}</span>{{ DiscussionPrefix(self.Context, discussion) }}
+			<span>{{ self.Context.GetDefinition('DiscussionType') }}</span>{{ discussion.DiscussionPrefix() }}
 		</li>
 		<li class="DiscussionTopic">
 			<span>{{ self.Context.GetDefinition('DiscussionTopic') }}</span><a href="{{ UnreadUrl|raw }}" class="DiscussionTopicName">{{ discussion.Name|raw }}</a>
