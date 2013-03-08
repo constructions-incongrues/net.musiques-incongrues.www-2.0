@@ -77,7 +77,7 @@ class ErrorManager {
 
 	function Write(&$Context) {
 
-		@include(ThemeFilePath($Context->Configuration, 'fatal_error.php'));
+		include(ThemeFilePath($Context->Configuration, 'fatal_error.php'));
 		// Cleanup
 		if ($Context) $Context->Unload();
 		die();
